@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bakbak+One&family=Josefin+Sans:wght@500&family=Moon+Dance&family=Quicksand:wght@500&family=Righteous&family=Tilt+Prism&display=swap");
+
+.navlink {
+  color: black;
+  text-decoration: none;
+  font-family: "Josefin Sans", sans-serif;
+  margin: 4px;
+}
+
+.container {
+  padding: 7px;
+}
+
+.navlink-header {
+  font-weight: 700;
+}
+.navlink:hover {
+  color: #555555;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  background-color: #ddd;
+  padding: 5px;
+}
+
+.box {
+  padding: 12px;
+}
+
+.blog-card {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.form {
+  text-align: left;
+}
+
+.profile-pic {
+  width: 15%;
+  padding: 23px;
+  border-radius: 100%;
+}
+
+.name {
+  font-weight: 400;
+  font-family: "Quick Sands";
+}
+
+.icon {
+  display: flex;
+  justify-content: end;
+  padding: 3px;
+}
+
+.open {
+  margin: 8px;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: black;
+}
