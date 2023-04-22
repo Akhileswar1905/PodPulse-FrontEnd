@@ -1,30 +1,93 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+
 function NavBar() {
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
+  let navbarWidth;
+  if (window.innerWidth <= 768) {
+    navbarWidth = "20vw";
+  } else {
+    navbarWidth = "15vw";
+  }
+  const handleCollapse = () => {
+    console.log(isCollapsed);
+    if (isCollapsed) {
+      const links = document.querySelector(".links");
+      const miniLinks = document.querySelector(".mini-links");
+      const navbar = document.querySelector(".navbar");
+      links.style.display = "none";
+      miniLinks.style.display = "grid";
+      miniLinks.style.placeContent = "center";
+      if (window.innerWidth <= 768) {
+        navbar.style.width = "10vw";
+      } else {
+        navbar.style.width = "5vw";
+      }
+      setIsCollapsed(false);
+    } else {
+      const links = document.querySelector(".links");
+      const miniLinks = document.querySelector(".mini-links");
+      const navbar = document.querySelector(".navbar");
+
+      links.style.display = "grid";
+      miniLinks.style.display = "none";
+      links.style.placeContent = "center";
+      if (window.innerWidth <= 768) {
+        navbar.style.width = "20vw";
+      } else {
+        navbar.style.width = "15vw";
+      }
+      setIsCollapsed(true);
+    }
+  };
+
   return (
-    <Navbar bg="light" expand="lg" className="navbar">
-      <Container>
-        <NavLink className={"navlink navlink-header"} to="/">
-          <Navbar.Brand>PodPulse</Navbar.Brand>
-        </NavLink>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <NavLink className={"navlink"} to="/">
+    <div className="nav">
+      <div className="navbar" style={{ width: navbarWidth }}>
+        <box-icon onClick={handleCollapse} name="menu"></box-icon>{" "}
+        <div
+          className="links"
+          style={{ display: "grid", placeContent: "center" }}
+        >
+          <div className="link">
+            <box-icon name="home-alt-2"></box-icon>
+            <NavLink className="navlink" to="/">
               Home
             </NavLink>
-            <NavLink className={"navlink"} to="/about">
-              About
+          </div>
+          <div className="link">
+            <box-icon name="heart"></box-icon>
+            <NavLink className="navlink" to="/fav">
+              Liked Podcasts
             </NavLink>
-            <NavLink className={"navlink"} to="/new-podcast">
+          </div>
+          <div className="link">
+            <box-icon name="plus"></box-icon>
+            <NavLink className="navlink" to="/new-podcast">
               New Podcast
             </NavLink>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          </div>
+        </div>
+        <div className="mini-links" style={{ display: "none" }}>
+          <div>
+            <NavLink className="navlink icon" to="/">
+              <box-icon name="home-alt-2"></box-icon>
+            </NavLink>
+          </div>
+          <div>
+            <NavLink className="navlink icon" to="/fav">
+              <box-icon name="heart"></box-icon>
+            </NavLink>
+          </div>
+          <div>
+            <NavLink className="navlink icon" to="/new-podcast">
+              <box-icon name="plus"></box-icon>
+            </NavLink>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

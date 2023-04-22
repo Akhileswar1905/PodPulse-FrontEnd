@@ -1,31 +1,114 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bakbak+One&family=Josefin+Sans:wght@500&family=Moon+Dance&family=Quicksand:wght@500&family=Righteous&family=Tilt+Prism&display=swap");
 
+html::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 12px;
+  height: 50px;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: transparent;
+  margin: 23px;
+}
+
+.body {
+  display: flex;
+  width: 85%;
+}
+
+.nav {
+  display: block;
+}
+
 .navlink {
   color: black;
   text-decoration: none;
   font-family: "Josefin Sans", sans-serif;
-  margin: 4px;
 }
 
 .container {
   padding: 7px;
 }
 
+.navlink-header:hover {
+  color: #000 !important;
+}
 .navlink-header {
   font-weight: 700;
+  font-size: 1.75em;
 }
 .navlink:hover {
   color: #555555;
 }
 
 .navbar {
+  width: 15vw;
+  height: 100vh;
+  display: block;
+  position: sticky;
+}
+
+.link {
   display: flex;
   align-items: center;
 }
 
+.podcast {
+  height: 55%;
+  width: 20%;
+  padding: 21px;
+  margin: 23px;
+  display: grid;
+}
+
+.podcast-box {
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 30px;
+  margin: 20px;
+}
+
+.podcast > img {
+  width: 100%;
+}
+
+.podcast > button {
+  background-color: white;
+}
+.links,
+.mini-links {
+  display: grid;
+  place-content: center;
+  height: 30vh;
+}
+
+.btns > button {
+  width: 100%;
+}
+
+.mini-links {
+  display: none;
+}
+
+.links div {
+  margin: 10px;
+}
+
+.icon {
+  margin: 12px;
+}
+
 .navbar {
-  background-color: #ddd;
   padding: 5px;
+  border-right: 1px solid black;
 }
 
 .box {
@@ -64,6 +147,37 @@
 .input {
   background-color: transparent;
   border: none;
+  border-radius: none !important;
   outline: none;
-  border-bottom: black;
+  border-bottom: 2px solid black;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    width: 20vw;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .navbar {
+    font-size: 0.5em;
+  }
+
+  .navlink-header {
+    font-size: 1.25em;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .navbar {
+    font-size: 0.75em;
+  }
+
+  .navlink-header {
+    font-size: 1.25em;
+  }
+  .podcast {
+    font-size: 0.75em;
+    width: 100%;
+  }
 }
