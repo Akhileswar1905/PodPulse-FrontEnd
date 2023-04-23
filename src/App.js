@@ -10,16 +10,24 @@ import Navbar from "react-bootstrap/Navbar";
 function App() {
   return (
     <div className="box">
-      <NavLink
-        style={{
-          textDecoration: "none",
-          padding: "0",
-          margin: "0",
-        }}
-        to="/"
-      >
-        <Navbar.Brand className="navlink-header navlink">PodPulse</Navbar.Brand>
-      </NavLink>
+      <div className="top">
+        <NavLink
+          style={{
+            textDecoration: "none",
+            padding: "0",
+            margin: "0",
+          }}
+          to="/"
+        >
+          <Navbar.Brand className="navlink-header navlink">
+            PodPulse
+          </Navbar.Brand>
+        </NavLink>
+        {/* Search Bar */}
+        <div className="search-bar">
+          <input type="search" placeholder="search..." />
+        </div>
+      </div>
       <div className="body">
         <NavBar />
         <Routes>

@@ -64,7 +64,7 @@ function NavBar() {
             <NavLink className="navlink" to="/fav">
               <i
                 style={{ margin: "4px", cursor: "pointer" }}
-                className="fa-regular fa-heart"
+                className="fa-solid fa-heart"
               ></i>
               Liked Podcasts
             </NavLink>
@@ -78,6 +78,15 @@ function NavBar() {
               New Podcast
             </NavLink>
           </div>
+          {/* <div className="link">
+            <NavLink className="navlink">
+              <i
+                className="fa-solid fa-circle-half-stroke"
+                style={{ margin: "4px", cursor: "pointer" }}
+              ></i>
+              Dark Mode
+            </NavLink>
+          </div> */}
         </div>
         <div className="mini-links" style={{ display: "none" }}>
           <div>
@@ -95,6 +104,12 @@ function NavBar() {
               <box-icon name="plus"></box-icon>
             </NavLink>
           </div>
+          {/* <div>
+            <i
+              className="fa-solid fa-circle-half-stroke"
+              style={{ margin: "4px", cursor: "pointer" }}
+            ></i>
+          </div> */}
         </div>
       </div>
     </div>

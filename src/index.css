@@ -52,6 +52,21 @@ html::-webkit-scrollbar-track {
   position: sticky;
 }
 
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid #222;
+  margin: 5px;
+}
+
+.search-bar > input {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+  padding: 4px;
+}
+
 .link {
   display: flex;
   align-items: center;
@@ -165,6 +180,15 @@ html::-webkit-scrollbar-track {
 @media screen and (max-width: 330px) {
   .navbar {
     font-size: 0.5em;
+  }
+
+  .top {
+    padding: 7px;
+    display: grid;
+  }
+
+  .search-bar {
+    padding: 7px;
   }
 
   .navlink-header {
