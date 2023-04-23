@@ -55,6 +55,7 @@ html::-webkit-scrollbar-track {
 .link {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .podcast {
@@ -104,9 +105,12 @@ html::-webkit-scrollbar-track {
 
 .icon {
   margin: 12px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .navbar {
+  height: 100%;
   padding: 5px;
   border-right: 1px solid black;
 }
@@ -179,5 +183,9 @@ html::-webkit-scrollbar-track {
   .podcast {
     font-size: 0.75em;
     width: 100%;
+  }
+
+  .navlink > i {
+    display: none;
   }
 }

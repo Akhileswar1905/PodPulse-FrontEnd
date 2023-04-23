@@ -42,46 +42,56 @@ function NavBar() {
     }
   };
 
+  let align = isCollapsed ? "left" : "center";
   return (
     <div className="nav">
-      <div className="navbar" style={{ width: navbarWidth }}>
+      <div className="navbar " style={{ width: navbarWidth, textAlign: align }}>
         <box-icon onClick={handleCollapse} name="menu"></box-icon>{" "}
         <div
           className="links"
           style={{ display: "grid", placeContent: "center" }}
         >
           <div className="link">
-            <box-icon name="home-alt-2"></box-icon>
             <NavLink className="navlink" to="/">
+              <i
+                className="fa-solid fa-house"
+                style={{ margin: "4px", cursor: "pointer" }}
+              ></i>
               Home
             </NavLink>
           </div>
           <div className="link">
-            <box-icon name="heart"></box-icon>
             <NavLink className="navlink" to="/fav">
+              <i
+                style={{ margin: "4px", cursor: "pointer" }}
+                className="fa-regular fa-heart"
+              ></i>
               Liked Podcasts
             </NavLink>
           </div>
           <div className="link">
-            <box-icon name="plus"></box-icon>
             <NavLink className="navlink" to="/new-podcast">
+              <i
+                className="fa-solid fa-plus"
+                style={{ margin: "4px", cursor: "pointer" }}
+              ></i>
               New Podcast
             </NavLink>
           </div>
         </div>
         <div className="mini-links" style={{ display: "none" }}>
           <div>
-            <NavLink className="navlink icon" to="/">
+            <NavLink className=" icon" to="/">
               <box-icon name="home-alt-2"></box-icon>
             </NavLink>
           </div>
           <div>
-            <NavLink className="navlink icon" to="/fav">
+            <NavLink className=" icon" to="/fav">
               <box-icon name="heart"></box-icon>
             </NavLink>
           </div>
           <div>
-            <NavLink className="navlink icon" to="/new-podcast">
+            <NavLink className=" icon" to="/new-podcast">
               <box-icon name="plus"></box-icon>
             </NavLink>
           </div>
