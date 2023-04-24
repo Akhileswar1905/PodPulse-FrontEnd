@@ -6,6 +6,9 @@ import About from "./components/Fav";
 import NavBar from "./components/NavBar";
 import NewPodcast from "./components/NewPodcast";
 import Navbar from "react-bootstrap/Navbar";
+import Auth from "./Auth/Auth";
+import Login from "./Auth/Login";
+import SignUp from "./Auth/SignUp";
 
 function App() {
   return (
@@ -34,6 +37,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/fav" element={<About />} />
           <Route path="/new-podcast" element={<NewPodcast />} />
+          <Route path="/auth" element={<Auth/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<SignUp/>}/>
         </Routes>
       </div>
     </div>
