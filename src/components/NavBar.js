@@ -78,15 +78,15 @@ function NavBar() {
               New Podcast
             </NavLink>
           </div>
-          {/* <div className="link">
-            <NavLink className="navlink">
+          <div className="link">
+            <NavLink className="navlink" to={"/signup"}>
               <i
-                className="fa-solid fa-circle-half-stroke"
+                className="fa-solid fa-user"
                 style={{ margin: "4px", cursor: "pointer" }}
               ></i>
-              Dark Mode
+              SignUp/Login
             </NavLink>
-          </div> */}
+          </div>
         </div>
         <div className="mini-links" style={{ display: "none" }}>
           <div>
@@ -104,12 +104,14 @@ function NavBar() {
               <box-icon name="plus"></box-icon>
             </NavLink>
           </div>
-          {/* <div>
-            <i
-              className="fa-solid fa-circle-half-stroke"
-              style={{ margin: "4px", cursor: "pointer" }}
-            ></i>
-          </div> */}
+          <div>
+            <NavLink to={"/signup"} className=" icon">
+              <i
+                className="fa-solid fa-user"
+                style={{ margin: "4px", cursor: "pointer", color: "black" }}
+              ></i>
+            </NavLink>
+          </div>
         </div>
       </div>
     </div>

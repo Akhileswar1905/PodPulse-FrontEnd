@@ -1,41 +1,39 @@
 import React, { useState } from "react";
 
 const NewPodcast = () => {
-  const [podcastName, setPodcastName] = useState("");
-  const [speakerName, setSpeakerName] = useState("");
-  const [podcastDescription, setPodcastDescription] = useState("");
+  const [form, setForm] = useState({});
   const [category, setCategory] = useState("");
-  const [podcastFile, setPodcastFile] = useState(null);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "podcastName") {
-      setPodcastName(value);
-    } else if (name === "podcastDescription") {
-      setPodcastDescription(value);
-    } else if (name === "category") {
-      setCategory(value);
-    } else if (name === "speakerName") {
-      setSpeakerName(value);
+  const formData = new FormData();
+  const handleInputChange = (e) => {
+    if (e.target.name === "PodcastFile") {
+      formData.append("PodcastFile", e.target.files[0]);
+      console.log(e.target.files);
+    }
+    if (e.target.name === "category") {
+      setCategory(e.target.value);
+    } else {
+      formData.append(e.target.name, e.target.value);
     }
   };
 
-  const handleFileChange = (event) => {
-    setPodcastFile(URL.createObjectURL(event.target.files[0]));
-  };
+  // Post
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Podcast Name: ", podcastName);
-    console.log("Speaker Name: ", speakerName);
-    console.log("Podcast Description: ", podcastDescription);
-    console.log("Category: ", category);
-    console.log("Podcast file: ", podcastFile);
-    setPodcastName("");
-    setSpeakerName("");
-    setPodcastDescription("");
-    setCategory("");
-    setPodcastFile("");
+    console.log(event.target.files);
+
+    // Api calls
+
+    const res = fetch("http://127.0.0.1:8000/api/addAudio/", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + localStorage.getItem("token"),
+      },
+    });
+
+    console.log(await (await res).json());
   };
 
   let fileType = "";
@@ -47,6 +45,7 @@ const NewPodcast = () => {
 
   return (
     <div className="form container">
+      <h1 className="mt-3 mb-3">Upload Podcast</h1>
       <form onSubmit={handleSubmit}>
         <div className="m-3">
           <label htmlFor="podcastname" className="form-label">
@@ -57,9 +56,8 @@ const NewPodcast = () => {
             type="text"
             placeholder="Please Enter Podcast Name"
             className="form-control input"
-            name="podcastName"
+            name="PodcastName"
             aria-describedby="nameHelp"
-            value={podcastName}
             onChange={handleInputChange}
           />
         </div>
@@ -72,9 +70,8 @@ const NewPodcast = () => {
             type="text"
             placeholder="Please Enter Speaker Name"
             className="form-control input"
-            name="speakerName"
+            name="SpeakerName"
             aria-describedby="nameHelp"
-            value={speakerName}
             onChange={handleInputChange}
           />
         </div>
@@ -87,9 +84,8 @@ const NewPodcast = () => {
             type="text"
             placeholder="Please Enter Podcast Description"
             className="form-control input"
-            name="podcastDescription"
+            name="PodcastDescription"
             aria-describedby="descriptionHelp"
-            value={podcastDescription}
             onChange={handleInputChange}
           />
         </div>
@@ -127,18 +123,23 @@ const NewPodcast = () => {
           </div>
         </div>
         <div className="form-check">
-          <label htmlFor="podcastFile" className="form-check-label">
+          <label htmlFor="PodcastFile" className="form-check-label">
             Podcast File
           </label>
           <input
             className="form-control input"
             type="file"
+            name="PodcastFile"
             accept={fileType}
-            onChange={handleFileChange}
+            onChange={handleInputChange}
           />
         </div>
 
-        <button type="submit" className="btn m-3 btn-primary">
+        <button
+          type="submit"
+          onClick={handleSubmit}
+          className="btn m-3 btn-primary"
+        >
           Add
         </button>
       </form>

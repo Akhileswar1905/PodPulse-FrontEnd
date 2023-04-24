@@ -32,6 +32,7 @@ html::-webkit-scrollbar-track {
 
 .container {
   padding: 7px;
+  height: 100vh;
 }
 
 .navlink-header:hover {
@@ -163,14 +164,18 @@ html::-webkit-scrollbar-track {
   margin: 8px;
 }
 
-.input {
-  background-color: transparent;
-  border: none;
-  border-radius: none !important;
-  outline: none;
-  border-bottom: 2px solid black;
+.auth-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.form {
+  width: 75%;
+}
+
+/* Media Queries */
 @media screen and (max-width: 768px) {
   .navbar {
     width: 20vw;
