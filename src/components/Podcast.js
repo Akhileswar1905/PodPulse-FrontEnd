@@ -16,8 +16,13 @@ const Podcast = (props) => {
   const handlePlay = (e, podcast) => {
     if (e.target.className === "fa-solid fa-play") {
       e.target.className = "fa-solid fa-pause";
+
+      const pod = document.querySelector(`#${podcast.PodcastName}`);
+      pod.play();
     } else {
+      const pod = document.querySelector(`#${podcast.PodcastName}`);
       e.target.className = "fa-solid fa-play";
+      pod.pause();
     }
 
     // Api calls
@@ -65,17 +70,17 @@ const Podcast = (props) => {
                   <Card.Text>{podcast.PodcastDescription}</Card.Text>
                 </Card.Body>
                 <div className="icon">
-                    <i
-                      className="fa-solid fa-play"
-                      style={{ margin: "4px", cursor: "pointer" }}
-                      onClick={(e) => handlePlay(e, podcast)}
-                      id="play"
-                    >
-
-                  <audio src={file} >
-                  </audio>
-
-                    </i>
+                  <i
+                    className="fa-solid fa-play"
+                    style={{ margin: "4px", cursor: "pointer" }}
+                    onClick={(e) => handlePlay(e, podcast)}
+                    id="play"
+                  >
+                    <audio
+                      src={`http://127.0.0.1:8000/media/${podcast.PodcastFile}`}
+                      id={podcast.PodcastName}
+                    ></audio>
+                  </i>
 
                   <i
                     onClick={handleLike}
