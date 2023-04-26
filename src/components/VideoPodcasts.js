@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 
-const Podcast = (props) => {
+const VideoPodcasts = () => {
   const [podcasts, setPodcasts] = useState([]);
   const handleLike = (e) => {
     if (e.target.className === "fa-regular fa-heart") {
@@ -15,7 +15,6 @@ const Podcast = (props) => {
   const handlePlay = (e, podcast) => {
     if (e.target.className === "fa-solid fa-play") {
       e.target.className = "fa-solid fa-pause";
-
       const pod = document.querySelector(`#${podcast.PodcastName}`);
       pod.play();
     } else {
@@ -37,7 +36,7 @@ const Podcast = (props) => {
 
   useEffect(() => {
     const fetchPods = async () => {
-      const res = fetch("http://127.0.0.1:8000/api/audiopodcasts/", {
+      const res = fetch("http://127.0.0.1:8000/api/videopodcasts/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -45,10 +44,12 @@ const Podcast = (props) => {
         },
       });
 
+      console.log("res", await res);
+
       const data = await (await res).json();
+      console.log("data", data);
       const pods = JSON.parse(data);
       setPodcasts(pods);
-      console.log(pods);
     };
 
     fetchPods();
@@ -63,6 +64,13 @@ const Podcast = (props) => {
               <Card>
                 <Card.Body>
                   {/* {console.log(podcast)} */}
+                  <video
+                    src={`http://127.0.0.1:8000/media/${podcast.PodcastFile}`}
+                    style={{ backgroundColor: "black" }}
+                    controls
+                    loop
+                    id={`${podcast.PodcastName}`}
+                  ></video>
                   <Card.Title>{podcast.PodcastName}</Card.Title>
                   <Card.Text>{podcast.PodcastDescription}</Card.Text>
                 </Card.Body>
@@ -72,12 +80,7 @@ const Podcast = (props) => {
                     style={{ margin: "4px", cursor: "pointer" }}
                     onClick={(e) => handlePlay(e, podcast)}
                     id="play"
-                  >
-                    <audio
-                      src={`http://127.0.0.1:8000/media/${podcast.PodcastFile}`}
-                      id={podcast.PodcastName}
-                    ></audio>
-                  </i>
+                  ></i>
 
                   <i
                     onClick={handleLike}
@@ -94,4 +97,4 @@ const Podcast = (props) => {
   );
 };
 
-export default Podcast;
+export default VideoPodcasts;

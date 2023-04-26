@@ -1,7 +1,7 @@
 import React from "react";
 
 const Fav = () => {
-  return <div className="container">Fav</div>;
+  return <div className="container"></div>;
 };
 
 export default Fav;

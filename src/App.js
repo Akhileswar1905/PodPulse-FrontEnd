@@ -8,6 +8,7 @@ import NewPodcast from "./components/NewPodcast";
 import Navbar from "react-bootstrap/Navbar";
 import Login from "./Auth/Login";
 import SignUp from "./Auth/SignUp";
+import VideoPodcasts from "./components/VideoPodcasts";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/new-podcast" element={<NewPodcast />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/video-podcasts" element={<VideoPodcasts />} />
         </Routes>
       </div>
     </div>

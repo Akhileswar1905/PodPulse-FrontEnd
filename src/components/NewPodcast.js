@@ -1,18 +1,28 @@
 import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const NewPodcast = () => {
   const [form, setForm] = useState({});
   const [category, setCategory] = useState("");
+
   const formData = new FormData();
   const handleInputChange = (e) => {
     if (e.target.name === "PodcastFile") {
-      formData.append("PodcastFile", e.target.files[0]);
-      console.log(e.target.files);
-    }
-    if (e.target.name === "category") {
+      formData.append("PodcastFile", e.target.files[0], e.target.files[0].name);
+      setForm({
+        ...form,
+        [e.target.name]: e.target.files[0],
+      });
+    } else if (e.target.name === "category") {
       setCategory(e.target.value);
     } else {
       formData.append(e.target.name, e.target.value);
+
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value,
+      });
     }
   };
 
@@ -20,22 +30,23 @@ const NewPodcast = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event.target.files);
+    console.log(formData);
 
     // Api calls
 
-    const res = fetch("http://127.0.0.1:8000/api/addAudio/", {
+    const res = await fetch("http://127.0.0.1:8000/api/addAudio/", {
       method: "POST",
-      body: JSON.stringify(formData),
+      body: JSON.stringify(form),
       headers: {
         "Content-Type": "application/json",
+
         Authorization: "Token " + localStorage.getItem("token"),
       },
     });
-
-    console.log(await (await res).json());
+    console.log("form data: ", formData);
+    console.log("form: ", form);
+    console.log(await res.json());
   };
-
   let fileType = "";
   if (category === "audio") {
     fileType = ".mp3";
@@ -45,104 +56,62 @@ const NewPodcast = () => {
 
   return (
     <div className="form container">
-      <h1 className="mt-3 mb-3">Upload Podcast</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="m-3">
-          <label htmlFor="podcastname" className="form-label">
-            Podcast Name
-          </label>
-          <input
-            required
+      <Form>
+        <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Label>Podcast Name</Form.Label>
+          <Form.Control
+            onChange={handleInputChange}
             type="text"
-            placeholder="Please Enter Podcast Name"
-            className="form-control input"
+            placeholder="Enter Podcast Name"
             name="PodcastName"
-            aria-describedby="nameHelp"
-            onChange={handleInputChange}
           />
-        </div>
-        <div className="m-3">
-          <label htmlFor="speaker" className="form-label">
-            Speaker Name
-          </label>
-          <input
-            required
-            type="text"
-            placeholder="Please Enter Speaker Name"
-            className="form-control input"
-            name="SpeakerName"
-            aria-describedby="nameHelp"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="m-3">
-          <label htmlFor="description" className="form-label">
-            Podcast Description
-          </label>
-          <input
-            required
-            type="text"
-            placeholder="Please Enter Podcast Description"
-            className="form-control input"
-            name="PodcastDescription"
-            aria-describedby="descriptionHelp"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="m-3">
-          <label htmlFor="category" className="form-label">
-            Category
-          </label>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="category"
-              id="audio"
-              value="audio"
-              checked={category === "audio"}
-              onChange={handleInputChange}
-            />
-            <label className="form-check-label" htmlFor="audio">
-              Audio
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="category"
-              id="video"
-              value="video"
-              checked={category === "video"}
-              onChange={handleInputChange}
-            />
-            <label className="form-check-label" htmlFor="video">
-              Video
-            </label>
-          </div>
-        </div>
-        <div className="form-check">
-          <label htmlFor="PodcastFile" className="form-check-label">
-            Podcast File
-          </label>
-          <input
-            className="form-control input"
-            type="file"
-            name="PodcastFile"
-            accept={fileType}
-            onChange={handleInputChange}
-          />
-        </div>
+        </Form.Group>
 
-        <button
-          type="submit"
-          onClick={handleSubmit}
-          className="btn m-3 btn-primary"
-        >
-          Add
-        </button>
-      </form>
+        <Form.Group className="mb-3" controlId="formBasicSpeakerName">
+          <Form.Label>Speaker Name</Form.Label>
+          <Form.Control
+            onChange={handleInputChange}
+            type="text"
+            placeholder="Enter Speaker Name"
+            name="SpeakerName"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicDescription">
+          <Form.Label>Podcast Description</Form.Label>
+          <Form.Control
+            onChange={handleInputChange}
+            type="text"
+            placeholder="Enter Podcast Description"
+            name="PodcastDescription"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicAudio">
+          <Form.Label>Category</Form.Label>
+          <Form.Group className="mb-3">
+            <input type="radio" name="category" /> Audio
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <input type="radio" name="category" /> Video
+          </Form.Group>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicFile">
+          <Form.Label>Podcast File</Form.Label>
+          <Form.Control
+            onChange={handleInputChange}
+            type="file"
+            placeholder="Select the Podcast File"
+            accept={fileType}
+            name="PodcastFile"
+          />
+        </Form.Group>
+
+        <Button variant="primary" type="submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Form>
     </div>
   );
 };

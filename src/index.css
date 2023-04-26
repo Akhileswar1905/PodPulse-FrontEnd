@@ -175,6 +175,10 @@ html::-webkit-scrollbar-track {
   width: 75%;
 }
 
+video {
+  width: 50%;
+}
+
 /* Media Queries */
 @media screen and (max-width: 768px) {
   .navbar {
